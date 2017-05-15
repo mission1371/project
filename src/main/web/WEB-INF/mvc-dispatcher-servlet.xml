@@ -20,7 +20,11 @@
         </bean>
 
         <bean class="com.compare.service.DatabaseService"/>
-        <bean class="com.compare.connection.DatabaseManager"/>
+        <bean class="com.compare.conf.DatabaseManager"/>
+
+        <bean class="com.compare.service.SimpleOperations"/>
+        <bean class="com.compare.service.AverageOperations"/>
+        <bean class="com.compare.service.ComplexOperations"/>
 
     </beans>
 

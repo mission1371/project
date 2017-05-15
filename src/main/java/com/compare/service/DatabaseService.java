@@ -1,6 +1,6 @@
 package com.compare.service;
 
-import com.compare.connection.DatabaseManager;
+import com.compare.conf.DatabaseManager;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.joda.time.DateTime;
@@ -42,7 +42,6 @@ public class DatabaseService extends DatabaseManager implements IDatabaseService
             }
 
             stmt.close();
-            closeConnection();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,7 +77,6 @@ public class DatabaseService extends DatabaseManager implements IDatabaseService
 
             rs.close();
             stmt.close();
-            closeConnection();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -122,7 +120,6 @@ public class DatabaseService extends DatabaseManager implements IDatabaseService
 
             rs.close();
             stmt.close();
-            closeConnection();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -162,7 +159,6 @@ public class DatabaseService extends DatabaseManager implements IDatabaseService
 
             rs.close();
             stmt.close();
-            closeConnection();
 
         } catch (SQLException e) {
             e.printStackTrace();
