@@ -24,7 +24,7 @@ public class AverageOperations extends DatabaseManager {
         InvoiceDetail invoiceDetail = new InvoiceDetail();
 
         float total = 0;
-        int lineNumber = generateNumber(100);
+        int lineNumber = generateNumber(10);
         InvoiceDetail[] details = new InvoiceDetail[lineNumber];
         for (int i = 0; i < lineNumber; i++) {
 
@@ -98,6 +98,9 @@ public class AverageOperations extends DatabaseManager {
             }
 
             getConnection().createStatement().executeUpdate(selected.getSQLUpdate(selected.getId(), total));
+            if(lines.isEmpty()) {
+                continue;
+            }
             getConnection().createStatement().executeUpdate(invoiceDetail.getSQLUpdate(lines.toArray(new InvoiceDetail[lines.size()])));
 
         }

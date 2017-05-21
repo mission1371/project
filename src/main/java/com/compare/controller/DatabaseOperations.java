@@ -175,43 +175,6 @@ public class DatabaseOperations {
     }
 
 
-//
-//
-//
-//
-//    @ResponseBody
-//    @RequestMapping("readOperation")
-//    public String readOperation() {
-//
-//
-//        SnapshotSystem snap = new SnapshotSystem();
-////        System.out.println("init free memory --> " + (snap.freeMemory / (1024 * 1024)));
-//        JsonArray records = service.readRecords();
-//
-//        return generateReturn(snap, records);
-//    }
-//
-//    @ResponseBody
-//    @RequestMapping("updateOperation")
-//    public String updateOperation() {
-//
-//        SnapshotSystem snap = new SnapshotSystem();
-//        service.updateRecords();
-//
-//        return generateReturn(snap);
-//    }
-//
-//
-//    @ResponseBody
-//    @RequestMapping("deleteOperation")
-//    public String deleteOperation() {
-//
-//        SnapshotSystem snap = new SnapshotSystem();
-//        service.deleteRecords();
-//
-//        return generateReturn(snap);
-//    }
-
     private String generateReturn(SnapshotSystem preSnap) {
         return generateReturn(preSnap, null);
     }
@@ -226,7 +189,7 @@ public class DatabaseOperations {
         long duration = postSnap.time.getMillis() - preSnap.time.getMillis();
         long used = (preSnap.freeMemory - postSnap.freeMemory) / mb;
 
-        System.out.println(duration);
+//        System.out.println(duration);
 
         JsonObject ret = new JsonObject();
         ret.addProperty("success", "true");
@@ -262,7 +225,7 @@ public class DatabaseOperations {
         long allocatedMemory;
         long freeMemory;
 
-        public SnapshotSystem() {
+        private SnapshotSystem() {
             Runtime runtime = Runtime.getRuntime();
             this.time = new DateTime();
             this.maxMemory = runtime.maxMemory();

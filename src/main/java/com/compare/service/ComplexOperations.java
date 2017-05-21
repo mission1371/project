@@ -36,7 +36,7 @@ public class ComplexOperations extends DatabaseManager {
         }
 
         float total = 0;
-        int numOfInvoiceLine = generateNumber(100);
+        int numOfInvoiceLine = generateNumber(10);
         InvoiceDetail[] details = new InvoiceDetail[numOfInvoiceLine];
         for (int k = 0; k < numOfInvoiceLine; k++) {
             details[k] = new InvoiceDetail().generate(this, invoice.getId());
@@ -120,7 +120,7 @@ public class ComplexOperations extends DatabaseManager {
             for(int j = 0 ; j < num ; j++) {
                 invoices.add(new Invoice().generate(this));
                 float total = 0;
-                int numOfInvoiceLine = generateNumber(100);
+                int numOfInvoiceLine = generateNumber(10);
                 for (int k = 0; k < numOfInvoiceLine; k++) {
                     InvoiceDetail line = new InvoiceDetail().generate(this, invoices.get(j).getId());
                     total = total + line.getLineTotal();

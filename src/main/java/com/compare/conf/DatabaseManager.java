@@ -1,6 +1,6 @@
 package com.compare.conf;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
+import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 import org.joda.time.DateTime;
 
 import java.sql.Connection;
@@ -12,12 +12,22 @@ import java.util.UUID;
  */
 public class DatabaseManager {
 
+    private MysqlConnectionPoolDataSource dataSource = null;
     private Connection connection;
+
+    {
+        dataSource = new MysqlConnectionPoolDataSource();
+        dataSource.setUser("root");
+        dataSource.setPassword("1234");
+        dataSource.setServerName("localhost");
+        dataSource.setDatabaseName("deneme");
+        dataSource.setPort(3306);
+    }
 
     protected Connection getConnection() {
 
         if (null == connection) {
-            connection = createConnection();
+            return createConnection();
         }
         return connection;
     }
@@ -58,7 +68,7 @@ public class DatabaseManager {
 
     public String generateRandomString(int len) {
         String text = "";
-        String chars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0123456789!^+%&/()=?_@.,<> ";
+        String chars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0123456789 ";
 
         for (int i = 0; i < len; i++) {
             text += chars.charAt((int) Math.floor(Math.random() * chars.length()));
@@ -72,23 +82,14 @@ public class DatabaseManager {
      **/
 
 
-    private Connection createConnection() {
-        MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setUser("root");
-        dataSource.setPassword("1234");
-        dataSource.setServerName("localhost");
-        dataSource.setDatabaseName("deneme");
-        dataSource.setPort(3306);
-
-        Connection conn = null;
+    private synchronized Connection createConnection() {
         try {
-            System.out.println("trying to connect");
-            conn = dataSource.getConnection();
+            connection = dataSource.getPooledConnection().getConnection();
         } catch (SQLException e) {
             System.out.println("failed to connect");
             e.printStackTrace();
         }
-        return conn;
+        return connection;
     }
 
 }

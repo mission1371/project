@@ -25,8 +25,8 @@ public class InvoiceDetail {
         this.id = connection.generateOid();
         this.createdDateTime = connection.generateTimestamp();
         this.invoiceId = invoiceId;
-        this.itemName = connection.generateRandomString(100);
-        this.itemDescription = connection.generateRandomString(1000);
+        this.itemName = connection.generateRandomString(10);
+        this.itemDescription = connection.generateRandomString(100);
         this.unitPrice = connection.generateDecimal();
         this.quantity = connection.generateNumber(10);
         this.lineTotal = this.unitPrice * this.quantity;
